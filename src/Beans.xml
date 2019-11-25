@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- C'est comme new Date(09,10, 2019) -->
+	<bean id="09/10/2019" class="org.mql.spring.models.Date" scope="prototype"> <!-- scope par defaut est singleton -->
+		<property name="day" value="9" />
+		<property name="month" value="10" />
+		<property name="year" value="2019" />
+	</bean>
+	
+	<bean id="Spring" class="org.mql.spring.models.Document" >
+		<property name="id" value="100" /> <!-- le name se base sur le nom du setter -->
+		<property name="title" value="Introduction au Framework Spring" />
+		<property name="price" value="456" />
+		<property name="datePublished" ref="09/10/2019" /> <!-- Wirring -->
+	</bean>
+</beans>

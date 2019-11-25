@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="javax.swing.JFrame" init-method="pack">
+		<property name="size">
+			<!-- Bean Interne -->
+			<bean class="java.awt.Dimension">
+				<constructor-arg value="500" />
+				<constructor-arg value="300" />
+			</bean>
+		</property>
+		<property name="iconImage">
+		<!-- Je peux ici faire <value> et <ref> -->
+			<bean class="java.awt.Image" factory-bean="icon" factory-method="getImage" />
+		</property>
+		<property name="contentPane" ref="form" />
+		<property name="resizable" value="false" />
+		<!-- SpEL (Spring Expression Language) -->
+		<property name="defaultCloseOperation" value="#{T(javax.swing.JFrame).EXIT_ON_CLOSE}"/>
+		<property name="visible" value="true" />
+	</bean>
+	<bean id="icon" class="javax.swing.ImageIcon">
+		<constructor-arg value="resources/icons/icon.png" />
+	</bean>
+	<bean id="form" class="org.mql.spring.swing.Form">
+		<property name="labelWidth" value="120" />
+		<property name="fields">
+			<list>
+				<bean class="org.mql.spring.models.Field">
+					<constructor-arg value="Référence"/>
+					<constructor-arg value="15"/>
+				</bean>
+				<bean class="org.mql.spring.models.Field">
+					<constructor-arg value="Désiration"/>
+					<constructor-arg value="30"/>
+				</bean>
+				<bean class="org.mql.spring.models.Field">
+					<constructor-arg value="Prix unitaire"/>
+					<constructor-arg value="10"/>
+					<constructor-arg value="0"/>
+				</bean>
+				<bean class="org.mql.spring.models.Field">
+					<constructor-arg value="Quantité en stock"/>
+					<constructor-arg value="10"/>
+					<constructor-arg value="0"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+</beans>
